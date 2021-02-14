@@ -1,0 +1,26 @@
+apiVersion: v1
+
+kind: ConfigMap
+metadata:
+  name: envconfig
+data:
+  MYNAME: "reddy"
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: envpod
+spec:
+  containers:
+  - name: envcont
+    image: k8s.gcr.io/busybox
+    command: ["echo"]
+    args: ["$(MYNAME) $(MYLAST)"]
+    env:
+    - name: MYLAST
+      value: "punith"
+    - name: MYNAME
+      valueFrom:
+        configMapKeyRef:
+          name: envconfig
+          key: MYNAME

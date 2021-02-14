@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test3dep
+  labels: 
+    app: test33
+spec:
+  selector:
+    matchLabels:
+      app: test3pod
+  template:
+    metadata:
+      labels:
+        app: test3pod
+    spec:
+      containers:
+      - name: testc
+        image: nginx
+        ports:
+        -  containerPort: 80
+        volumeMounts:
+        - name: testvol
+          mountPath: "/usr/share/nginx/html"
+      volumes:
+      - name: testvol
+        persistentVolumeClaim:
+          claimName: www-web-0

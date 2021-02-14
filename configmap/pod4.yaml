@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: configdemo4
+spec:
+  containers:
+  - name: alp
+    image: alpine
+    command: ['sh', '-c', 'echo Container 1 is Running ; sleep 3600']
+    env:
+      - name: anything
+        valueFrom:
+          configMapKeyRef:
+            name: config
+            key: initial_lives
+    volumeMounts:
+    - name: confi
+      mountPath: /reddy
+    volumeMounts:
+    - name: confi2
+      mountPath: /reddy2
+  volumes:
+  - name: confi
+    configMap:
+      name: config
+  - name: confi2
+    configMap:
+      name: special-config
+

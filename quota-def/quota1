@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ResourceQuota
+metadata: 
+  name: quota1
+spec:
+  hard:
+    requests.cpu: 2
+    limits.cpu: 10
+    configmaps: "2"
+    secrets: 2
+

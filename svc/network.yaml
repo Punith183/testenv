@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: networkpo
+spec:
+  podSelector:
+    matchLabels:
+      app: helloworld
+  policyTypes:
+  - Ingress
+  ingress:
+  - from:
+    - ipBlock:
+        cidr: 10.32.0.0/12
+    ports: 
+    - protocol: TCP
+      port: 80

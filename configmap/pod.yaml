@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: configdemo
+spec:
+  containers:
+  - name: alp
+    image: alpine
+    command: ['sh', '-c', 'echo Container 1 is Running ; sleep 3600']
+    volumeMounts:
+    - name: confi
+      mountPath: /reddy
+  volumes:
+  - name: confi
+    configMap:
+      name: config
+
